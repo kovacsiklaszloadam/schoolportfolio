@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>List of all ToDos</title>
+    </head>
+    <body>
+        <h1>List of all ToDos</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+            <tr th:each="todo : ${todos}">
+                <td th:text="${todo.id}"></td>
+                <td th:text="${todo.title}"></td>
+                <td th:text="${todo.status}"></td>
+                <td>
+                    <form action="/update" method="post">
+                        <input type="hidden" th:name="id" th:value="${todo.id}">
+                        <button type="submit">Mark as done</button>
+                    </form>
+                </td>
+                <td> 
+                    <form action="/delete" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" th:name="id" th:value="${todo.id}">
+                        <button type="submit">Delete ToDo</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <a href="add" target="_self">Add new task</a>
+    </body>
+</html>
